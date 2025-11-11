@@ -19,16 +19,46 @@ import { SafeTransactionOperation } from './types'
 import { safeAbi, multiSendCallOnlyAbi } from '../utils/abis'
 import { encodeFunctionData } from 'viem'
 import { encodeMultiSendCallData } from '../utils/multisend'
+import * as constants from '../constants'
 
 const DEFAULT_ROLE_KEY = keccak256(stringToHex('P2P_SUPERFORM_ROLE')) as Hex
 
 export class OnboardingClient {
-  private readonly config: OnboardingConfig
+  private readonly config: Required<
+    Pick<
+      OnboardingConfig,
+      | 'p2pApiUrl'
+      | 'p2pAddress'
+      | 'p2pSuperformProxyFactoryAddress'
+      | 'rolesMasterCopyAddress'
+      | 'rolesIntegrityLibraryAddress'
+      | 'rolesPackerLibraryAddress'
+      | 'safeSingletonAddress'
+      | 'safeProxyFactoryAddress'
+      | 'safeMultiSendCallOnlyAddress'
+    >
+  > &
+    OnboardingConfig
   private readonly log: (message: string) => void
 
   constructor(config: OnboardingConfig) {
-    this.config = config
-    this.log = config.logger ?? ((message: string) => console.info(message))
+    this.config = {
+      ...config,
+      p2pApiUrl: config.p2pApiUrl ?? constants.P2P_API_URL,
+      p2pAddress: config.p2pAddress ?? constants.P2P_ADDRESS,
+      p2pSuperformProxyFactoryAddress:
+        config.p2pSuperformProxyFactoryAddress ?? constants.P2P_SUPERFORM_PROXY_FACTORY_ADDRESS,
+      rolesMasterCopyAddress: config.rolesMasterCopyAddress ?? constants.ROLES_MASTER_COPY_ADDRESS,
+      rolesIntegrityLibraryAddress:
+        config.rolesIntegrityLibraryAddress ?? constants.ROLES_INTEGRITY_LIBRARY_ADDRESS,
+      rolesPackerLibraryAddress:
+        config.rolesPackerLibraryAddress ?? constants.ROLES_PACKER_LIBRARY_ADDRESS,
+      safeSingletonAddress: config.safeSingletonAddress ?? constants.SAFE_SINGLETON_ADDRESS,
+      safeProxyFactoryAddress: config.safeProxyFactoryAddress ?? constants.SAFE_PROXY_FACTORY_ADDRESS,
+      safeMultiSendCallOnlyAddress:
+        config.safeMultiSendCallOnlyAddress ?? constants.SAFE_MULTI_SEND_CALL_ONLY_ADDRESS
+    }
+    this.log = this.config.logger ?? ((message: string) => console.info(message))
   }
 
   private async resolveFeeConfig(client: Address): Promise<FeeConfig> {

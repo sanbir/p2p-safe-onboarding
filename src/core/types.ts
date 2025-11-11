@@ -35,13 +35,13 @@ export interface SafeContractCall {
 }
 
 export interface OnboardingConfig extends WalletContext {
-  p2pApiUrl: string
+  p2pApiUrl?: string
   p2pApiToken?: string
-  p2pAddress: Address
-  p2pSuperformProxyFactoryAddress: Address
-  rolesMasterCopyAddress: Address
-  rolesIntegrityLibraryAddress: Address
-  rolesPackerLibraryAddress: Address
+  p2pAddress?: Address
+  p2pSuperformProxyFactoryAddress?: Address
+  rolesMasterCopyAddress?: Address
+  rolesIntegrityLibraryAddress?: Address
+  rolesPackerLibraryAddress?: Address
   safeSingletonAddress?: Address
   safeProxyFactoryAddress?: Address
   safeMultiSendCallOnlyAddress?: Address
