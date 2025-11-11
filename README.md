@@ -80,16 +80,18 @@ const publicClient = /* viem public client for the same chain */
 
 const onboarding = new OnboardingClient({
   walletClient,
-  publicClient,
-  p2pApiUrl: constants.P2P_API_URL,
-  p2pAddress: constants.P2P_ADDRESS,
-  p2pSuperformProxyFactoryAddress: constants.P2P_SUPERFORM_PROXY_FACTORY_ADDRESS,
-  rolesMasterCopyAddress: constants.ROLES_MASTER_COPY_ADDRESS,
-  rolesIntegrityLibraryAddress: constants.ROLES_INTEGRITY_LIBRARY_ADDRESS,
-  rolesPackerLibraryAddress: constants.ROLES_PACKER_LIBRARY_ADDRESS
+  publicClient
 })
 
-await onboarding.onboardClient({ clientAddress: walletClient.account.address })
+await onboarding.onboardClient()
+
+// Optional overrides (use constants or your own)
+// const onboarding = new OnboardingClient({
+//   walletClient,
+//   publicClient,
+//   p2pAddress: constants.P2P_ADDRESS,
+//   safeSingletonAddress: constants.SAFE_SINGLETON_ADDRESS
+// })
 ```
 
 ## Testing
