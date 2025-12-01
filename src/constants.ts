@@ -4,7 +4,7 @@ export const P2P_API_URL = 'https://api.p2p.org/clients' as const
 export const P2P_ADDRESS =
   '0x588ede4403DF0082C5ab245b35F0f79EB2d8033a' as const satisfies Address
 export const P2P_SUPERFORM_PROXY_FACTORY_ADDRESS =
-  '0x931F03069Bbac8cAb236D548bEB5b3eFcb4f1769' as const satisfies Address
+  '0x815B6A7c0b8F4D1c7cdb5031EBe802bf4f7e6d81' as const satisfies Address
 
 export const ROLES_MASTER_COPY_ADDRESS =
   '0x9646fDAD06d3e24444381f44362a3B0eB343D337' as const satisfies Address
@@ -22,4 +22,3 @@ export const SAFE_MULTI_SEND_CALL_ONLY_ADDRESS =
 
 export const SAFE_RPC_URL = process.env.RPC_URL || ''
 export const SAFE_OWNER_PRIVATE_KEY = process.env.PRIVATE_KEY || ''
-
